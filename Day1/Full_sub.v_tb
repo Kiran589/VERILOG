@@ -13,9 +13,10 @@ module sub_tb;
     #1 in1=1; in2=0; in3=1;
     #1 in1=1; in2=1; in3=0;
     #1 in1=1; in2=1; in3=1;
-    
+    initial begin
     $dumpfile("full_sub.vcd");
     $dumpvars();
-    #100 $finish;
-  end
+      #100 $finish;
+ end
+   end
     endmodule
