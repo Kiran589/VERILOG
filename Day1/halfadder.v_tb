@@ -1,0 +1,20 @@
+module ha_tb;
+  reg in1,in2;
+  wire sum,cy;
+  HA ha(.b(in2), .a(in1), .s(sum), .cout(cy));
+  initial begin
+    $monitor("at time %t, a=%b, b=%b, s=%b, c=%b", $time, in1,in2,sum,cy);
+    in1=0; in2=0;
+    #1
+    in1=0; in2=1;
+    #2
+    a=1; b=0;
+    #3
+    a=1;b=1;
+    #4
+    $dumpfile("HA.vcd");
+    $dumpvars();
+    #100 $finish;
+  end
+  
+endmodule
