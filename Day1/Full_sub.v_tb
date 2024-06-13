@@ -1,0 +1,21 @@
+module sub_tb;
+  reg in1,in2,in3;
+  wire outd,outb;
+  full_sub subb(.a(in1), .b(in2), .bin(in3), .differ(outd), .borro(outb));
+  initial begin
+    $monitor("time %0t, a=%b, b=%b, bin=%b, differ=%b, borrow=%b", $time,in1,in2,in3,outd,outb);
+    
+    in1=0; in2=0; in3=0;
+    #1 in1=0; in2=0; in3=1;
+    #1 in1=0; in2=1; in3=0;
+    #1 in1=0; in2=1; in3=1;
+    #1 in1=1; in2=0; in3=0;
+    #1 in1=1; in2=0; in3=1;
+    #1 in1=1; in2=1; in3=0;
+    #1 in1=1; in2=1; in3=1;
+    
+    $dumpfile("full_sub.vcd");
+    $dumpvars();
+    #100 $finish;
+  end
+    endmodule
