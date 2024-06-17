@@ -1,0 +1,54 @@
+`timescale 1ns / 1ps
+
+module alu_4bit_tb;
+
+reg [3:0] a_tb;
+reg [3:0] b_tb;
+reg [2:0] sel_tb;
+wire [3:0] result_tb;
+
+// Instantiate the ALU module
+alu_4bit uut (
+    .a(a_tb),
+    .b(b_tb),
+    .sel(sel_tb),
+    .result(result_tb)
+);
+
+initial begin
+    // Initialize inputs
+    a_tb = 0;
+    b_tb = 0;
+    sel_tb = 0;
+
+    // Wait for global reset
+    #100;
+
+    // Apply test vectors
+    // Test Addition
+    a_tb = 4'd3; b_tb = 4'd2; sel_tb = 3'b000; #10;
+    
+    // Test Subtraction
+    a_tb = 4'd5; b_tb = 4'd2; sel_tb = 3'b001; #10;
+    
+    // Test Division (Note: Division by zero should be handled in the ALU design)
+    a_tb = 4'd8; b_tb = 4'd2; sel_tb = 3'b010; #10;
+    
+    // Test Logical AND (Note: This will give either 1 or 0)
+    a_tb = 4'd1; b_tb = 4'd1; sel_tb = 3'b011; #10;
+    
+    // Test Bitwise AND
+    a_tb = 4'b1010; b_tb = 4'b1100; sel_tb = 3'b100; #10;
+    
+    // Test Bitwise OR
+    a_tb = 4'b1010; b_tb = 4'b1100; sel_tb = 3'b101; #10;
+    
+    // Test Bitwise NAND
+    a_tb = 4'b1010; b_tb = 4'b1100; sel_tb = 3'b110; #10;
+    
+    // Test Bitwise XNOR
+    a_tb = 4'b1010; b_tb = 4'b1100; sel_tb = 3'b111; #10;
+
+end
+
+endmodule
